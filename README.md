@@ -6,8 +6,19 @@ Try to improve live latex from
 - [vim-latex-live-preview](https://github.com/xuhdev/vim-latex-live-preview)  - dont' have any feedback
 - [dispatch.vim](https://github.com/tpope/vim-dispatch) - not support latex error in QuickFix
 
+Features:
+- Get compiler feedback inside Vim via vim status line.
+-- Show `Error Messages` when failed in Vim QuickFix that you can
+quickly jump to error line.
+- Don't require split windown.
+- Can custom your latex compiler.
+- Supoort Multi file latex project.
+
 ## Screenshot:
 ![screenshot](/doc/ss.png)
+
+## Requirement:
+- [Tmux](https://tmux.github.io)
 
 ## Usage:
 1. Open Vim inside Tmux
@@ -17,9 +28,6 @@ Try to improve live latex from
    your vim editor
 5. Using Pdf viewer that have features auto-reload to look fresh latex
    output - [vim-latex-live-preview #Known Working PDF Viewers](https://github.com/xuhdev/vim-latex-live-preview/wiki/Known-Working-PDF-Viewers)
-
-## Requirement:
-- [Tmux](https://tmux.github.io)
 
 ## Custom Latex Compiler
 
@@ -48,10 +56,14 @@ $tree
 └── vitae.tex
 ```
 
-`thesis.tex` is master latex file
+`thesis.tex` is master latex file, when edit any latex file need to
+compile `thesis.tex`
+
+Add `.vimrc.custom` to your top-level latex project and edit
+`thesis.tex` to your master latex file
 
 ```sh
 # .vimrc.custom
-# always need $PWD to using fullpath
+# edit thesis.tex to your master latex file
 autocmd BufWritePost *.tex call LiveLatexBuild($PWD."/thesis.tex")
 ```
