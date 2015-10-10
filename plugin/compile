@@ -1,0 +1,40 @@
+#!/bin/bash
+# from http://tex.stackexchange.com/questions/27878/pdflatex-bash-script-to-supress-all-output-except-error-messages
+ARGUMENT="$1"
+DIR=$(dirname "${ARGUMENT}")
+BASENAME=$(basename "${ARGUMENT}")
+cd ${DIR}
+#determine aux name by stripping .tex suffix and adding .aux
+AUXNAME="${BASENAME%.tex}.aux"
+
+# get name of bib outout in $TEMPDIR
+bib_output="$(mktemp -u)"
+
+# cmd variable
+latex="pdflatex"
+compile="$latex -shell-escape -interaction=nonstopmode -file-line-error $BASENAME"
+bibtex="bibtex -terse $AUXNAME"
+grep_latex='grep .*:[0-9]*:.*'
+
+# compile and keep exited code of compile
+($compile && $bibtex 2>&1 > $bib_output && $compile  && $compile ) | $grep_latex
+exited_code=${PIPESTATUS[0]}
+
+# print bibtex warning and error messages if output exists
+if [ -f $bib_output ];
+then
+  if grep -q "error message" $bib_output;
+  then
+    # error - show all message
+    cat $bib_output
+    exited_code=1
+  elif grep -q "Warning--" $bib_output;
+  then
+    # warning - show only warning message
+    cat $bib_output | grep "Warning--"
+    exited_code=1
+  fi
+fi
+
+# return exited code of compile
+exit $exited_code
