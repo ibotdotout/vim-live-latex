@@ -8,7 +8,7 @@ Try to improve live latex from
 
 Features:
 - Get compiler feedback inside Vim via vim status line.
--- Show `Error Messages` when failed in Vim QuickFix that you can
+- Show `Error Messages` when failed in Vim QuickFix that you can
 quickly jump to error line.
 - Don't require split windown.
 - Can custom your latex compiler.
@@ -21,6 +21,7 @@ quickly jump to error line.
 - [Tmux](https://tmux.github.io)
 
 ## Usage:
+#### Need to open Vim inside Tmux
 1. Open Vim inside Tmux
 2. Edit your latex file
 3. Save your latex
