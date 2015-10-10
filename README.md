@@ -10,7 +10,7 @@ Features:
 - Get compiler feedback inside Vim via vim status line.
 - Show `Error Messages` when failed in Vim QuickFix that you can
 quickly jump to error line.
-- Don't require split windown.
+- Don't require split window.
 - Can custom your latex compiler.
 - Supoort Multi file latex project.
 
@@ -28,7 +28,7 @@ quickly jump to error line.
 4. Our plugin will automatic complie latex file and send feed back to
    your vim editor
 5. Using Pdf viewer that have features auto-reload to look fresh latex
-   output - [vim-latex-live-preview #Known Working PDF Viewers](https://github.com/xuhdev/vim-latex-live-preview/wiki/Known-Working-PDF-Viewers)
+   output - [Skim for OSX](http://skim-app.sourceforge.net/relnotes.html), [Evince for Linux](https://wiki.gnome.org/Apps/Evince)
 
 ## Custom Latex Compiler
 
@@ -65,6 +65,6 @@ Add `.vimrc.custom` to your top-level latex project and edit
 
 ```sh
 # .vimrc.custom
-# edit thesis.tex to your master latex file
+# always need $PWD before master latex file for using fullpath
 autocmd BufWritePost *.tex call LiveLatexBuild($PWD."/thesis.tex")
 ```
