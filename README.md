@@ -18,5 +18,14 @@ Try to improve live latex from
 5. Using Pdf viewer that have features auto-reload to look fresh latex
    output - [vim-latex-live-preview #Known Working PDF Viewers](https://github.com/xuhdev/vim-latex-live-preview/wiki/Known-Working-PDF-Viewers)
 
+## Custom Latex Compiler
+
+Default latex compiler is `pdflatex`
+
+```sh
+# .vimrc
+let g:live_latex_compiler = "xelatex"
+```
+
 ## Requirement:
 - [Tmux](https://tmux.github.io)

@@ -6,11 +6,19 @@ function LiveLatexBuild(target)
     "Require vim run in tmux
     return 0
   endif
+
+  if exists('g:live_latex_compiler')
+    "set latex compiler
+    let s:compiler = g:live_latex_compiler
+  else
+    let s:compiler = "pdflatex"
+  endif
+
   cclose
   let pluginname ="vim-live-latex"
   let log = tempname()
   let s:path = matchstr(escape(&rtp, ' '), '[^,]*'.pluginname)
-  let cmd = s:path."/plugin/compile ".a:target
+  let cmd = s:path."/plugin/compile ".a:target." ".s:compiler
   " get active session:window of tmux and remove \n
   let tmux_active_window = system("tmux display-message -p '\#S:\#I'")
   let tmux_active_window = substitute(tmux_active_window, "\n", "", "")

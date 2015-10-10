@@ -1,5 +1,10 @@
 #!/bin/bash
 # from http://tex.stackexchange.com/questions/27878/pdflatex-bash-script-to-supress-all-output-except-error-messages
+
+# Argument
+# 1 - latex file
+# 2 - latex compiler (option)
+
 ARGUMENT="$1"
 DIR=$(dirname "${ARGUMENT}")
 BASENAME=$(basename "${ARGUMENT}")
@@ -11,7 +16,11 @@ AUXNAME="${BASENAME%.tex}.aux"
 bib_output="$(mktemp -u)"
 
 # cmd variable
-latex="pdflatex"
+if [ $# -ne 2 ]; then
+  latex="pdflatex"
+else
+  latex="$2"
+fi
 compile="$latex -shell-escape -interaction=nonstopmode -file-line-error $BASENAME"
 bibtex="bibtex -terse $AUXNAME"
 grep_latex='grep .*:[0-9]*:.*'
