@@ -1,4 +1,7 @@
-autocmd BufWritePost *.tex call LiveLatexBuild(expand("%:p"))
+augroup live_latex
+  autocmd!
+  autocmd BufWritePost *.tex call LiveLatexBuild(expand("%:p"))
+augroup END
 
 function LiveLatexBuild(target)
   "BuildLatex and feedback in QuickFix

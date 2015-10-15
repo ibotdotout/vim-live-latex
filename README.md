@@ -66,5 +66,8 @@ Add `.vimrc.custom` to your top-level latex project and edit
 ```sh
 # .vimrc.custom
 # always need $PWD before master latex file for using fullpath
-autocmd BufWritePost *.tex call LiveLatexBuild($PWD."/thesis.tex")
+augroup live_latex
+  autocmd!
+  autocmd BufWritePost *.tex call LiveLatexBuild($PWD."/thesis.tex")
+augroup END
 ```
